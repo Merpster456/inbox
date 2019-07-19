@@ -1,5 +1,8 @@
+import sys
 import smtplib
-import appJar
+from appJar import gui
+
+app = gui("SMTP Server","400x200")
 
 def intro():
 
@@ -10,19 +13,44 @@ def intro():
 
 
 class sending:
-    def __init__(self, FROM, PASS, TO, MSG):
-        self.from = FROM
-        self.pass = PASS
+    def __init__(self):
+        self.usr = self.pressM
+        self.Pass = PASS
         self.to = TO
         self.msg = MSG
 
 
+    def startapp():
+
+        app.addLabel("title", "Inbox")
+        app.setLabelBg("title", "gray")
+
+        app.addLabelEntry("Email")
+        app.addLabelSecretEntry("Password")
+
+        app.addButtons(["Submit", "Exit"], press)
+        
+        app.go()
+
+    def press(button):
+
+        if button == "Exit":
+            app.stop()
+            sys.exit(0)
+
+        else:
+
+            usr = app.getEntry("Email")
+            pwd = app.getEntry("Password")
+            return usr, pwd
+
 def main():
 
     intro()
-
-
-
+    startapp()
+    
+   server = smtplib.SMTP_SSL("smtp.gmail.com", 445)
+   server.login(
 
 if __name__ == '__main__':
 

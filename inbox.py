@@ -1,5 +1,5 @@
 import smtplib
-import pygame
+import appJar
 
 def intro():
 

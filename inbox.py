@@ -3,6 +3,8 @@ import smtplib
 from appJar import gui
 
 app = gui("SMTP Server","400x200")
+usr = ""
+pwd = ""
 
 def intro():
 
@@ -12,45 +14,51 @@ def intro():
     print("After filling out your account details just click send and you will be on your way!")
 
 
-class sending:
-    def __init__(self):
-        self.usr = self.pressM
-        self.Pass = PASS
-        self.to = TO
-        self.msg = MSG
+def startapp():
 
+    app.addLabel("title", "Inbox")
+    app.setLabelBg("title", "gray")
 
-    def startapp():
+    app.addLabelEntry("Email")
+    app.addLabelSecretEntry("Password")
 
-        app.addLabel("title", "Inbox")
-        app.setLabelBg("title", "gray")
+    app.addButtons(["Submit", "Exit"], press)
 
-        app.addLabelEntry("Email")
-        app.addLabelSecretEntry("Password")
+    app.go()
 
-        app.addButtons(["Submit", "Exit"], press)
-        
-        app.go()
+def press(button):
 
-    def press(button):
+    global usr
+    global pwd
 
-        if button == "Exit":
+    while button != "Exit":
+
+        usr = app.getEntry("Email")
+        pwd = app.getEntry("Password")
+
+        if button == "Submit":
+
             app.stop()
-            sys.exit(0)
+            break
 
-        else:
+    app.stop()
+    sys.exit(0)
 
-            usr = app.getEntry("Email")
-            pwd = app.getEntry("Password")
-            return usr, pwd
 
 def main():
 
+    global usr
+    global pwd
+
     intro()
     startapp()
-    
-   server = smtplib.SMTP_SSL("smtp.gmail.com", 445)
-   server.login(
+
+    #server = smtplib.SMTP_SSL("smtp.gmail.com", 445)
+    try:
+        print(usr, pwd)
+
+    except:
+        print("It failed")
 
 if __name__ == '__main__':
 

@@ -50,7 +50,7 @@ def main():
     startapp()
     
    server = smtplib.SMTP_SSL("smtp.gmail.com", 445)
-   server.login(
+   server.login()
 
 if __name__ == '__main__':
 
